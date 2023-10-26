@@ -10,6 +10,8 @@
   "dependencies": {
     "express": "^4.16.1"
   }
+  "config": {
   "awsAccessKey": "AWS_ACCESS_KEY_ID",
   "awsSecretKey": "AWS_SECRET_ACCESS_KEY"
+  }
 }
