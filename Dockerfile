@@ -1,7 +1,5 @@
 FROM node:16
 
-
-
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -16,10 +14,6 @@ RUN AWS_ACCESS_KEY_ID=$(aws ssm get-parameters --names /MyApp/AWSAccessKey --wit
     sed -i "s/AWS_ACCESS_KEY_ID/$AWS_ACCESS_KEY_ID/g" package.json && \
     sed -i "s/AWS_SECRET_ACCESS_KEY/$AWS_SECRET_ACCESS_KEY/g" package.json && \
     npm install
-
-# RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
 
 # Bundle app source
 COPY . .
