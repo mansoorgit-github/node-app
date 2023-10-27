@@ -1,9 +1,5 @@
 version: 0.2
 
-env:
-  parameter-store:
-    AWS_ACCESS_KEY_ID: /MyApp/AWSAccessKey
-    AWS_SECRET_ACCESS_KEY: /MyApp/AWSSecretKey
 
 phases:
   pre_build:
@@ -11,11 +7,9 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=566101360449.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)i
+      - REPOSITORY_URI=077708451457.dkr.ecr.ap-south-1.amazonaws.com/node-app
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-      - sed -i "s|<REPLACE_WITH_AWS_ACCESS_KEY>|$AWS_ACCESS_KEY_ID|" Dockerfile
-      - sed -i "s|<REPLACE_WITH_AWS_SECRET_KEY>|$AWS_SECRET_ACCESS_KEY|" Dockerfile
   build:
     commands:
       - echo Build started on `date`

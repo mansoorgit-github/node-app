@@ -1,17 +1,18 @@
 FROM node:16
 
+
+
 # Create app directory
 WORKDIR /usr/src/app
 
 # Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
 COPY package*.json ./
 
-# Environment variables for AWS credentials
-ENV AWS_ACCESS_KEY_ID=your-access-key-id
-ENV AWS_SECRET_ACCESS_KEY=your-secret-access-key
-
-# Install app dependencies
 RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
 
 # Bundle app source
 COPY . .
@@ -19,3 +20,4 @@ COPY . .
 EXPOSE 8080
 CMD [ "npm", "start" ]
 
+# This is dummy change for git demo
